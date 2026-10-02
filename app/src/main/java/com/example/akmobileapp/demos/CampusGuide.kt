@@ -15,7 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-private enum class CampusPlace(val title: String) {
+enum class CampusPlace(val title: String) {
     Library("Library"),
     ComputingLabs("Computing Labs"),
     Cafeteria("Cafeteria"),
@@ -61,7 +61,7 @@ fun CampusMenu(onSelect: (CampusPlace) -> Unit) {
         Button(
             onClick = { onSelect(CampusPlace.ComputingLabs) }
         ) {
-            Text("ComputingLabs")
+            Text("Computing Labs")
         }
         Button(
             onClick = { onSelect(CampusPlace.Cafeteria) }
@@ -71,13 +71,34 @@ fun CampusMenu(onSelect: (CampusPlace) -> Unit) {
         Button(
             onClick = { onSelect(CampusPlace.SportsCentre) }
         ) {
-            Text("SportsCentre")
+            Text("Sports Centre")
         }
         Button(
             onClick = { onSelect(CampusPlace.StudentSupport) }
         ) {
-            Text("StudentSupport")
+            Text("Student Support")
+        }
+    }
+}
+
+@Composable
+fun CampusScreen(
+    place: CampusPlace,
+    onBack: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+
+        Button(
+            onClick = { onBack() }
+        ) {
+            Text("Back")
         }
 
-
-    }}
+        Text(place.title)
+    }
+}
