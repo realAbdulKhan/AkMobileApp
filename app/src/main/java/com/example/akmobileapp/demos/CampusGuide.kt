@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-
+import androidx.activity.compose.BackHandler
 enum class CampusPlace(val title: String) {
     Library("Library"),
     ComputingLabs("Computing Labs"),
@@ -28,6 +28,9 @@ fun CampusGuide() {
 
     var selectedPlace: CampusPlace? by rememberSaveable {
         mutableStateOf<CampusPlace?>(null)
+    }
+    BackHandler(enabled = selectedPlace != null) {
+        selectedPlace = null
     }
 
     if (selectedPlace == null) {
@@ -51,7 +54,10 @@ fun CampusMenu(onSelect: (CampusPlace) -> Unit) {
             .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
+        Text("Campus Guide");
+        Text("Explore The New Campus")
         Button(
+            modifier =  Modifier.fillMaxWidth(),
             onClick = { onSelect(CampusPlace.Library) }
 
         ) {
@@ -59,21 +65,25 @@ fun CampusMenu(onSelect: (CampusPlace) -> Unit) {
         }
 
         Button(
+            modifier =  Modifier.fillMaxWidth(),
             onClick = { onSelect(CampusPlace.ComputingLabs) }
         ) {
             Text("Computing Labs")
         }
         Button(
+            modifier =  Modifier.fillMaxWidth(),
             onClick = { onSelect(CampusPlace.Cafeteria) }
         ) {
             Text("Cafeteria")
         }
         Button(
+            modifier =  Modifier.fillMaxWidth(),
             onClick = { onSelect(CampusPlace.SportsCentre) }
         ) {
             Text("Sports Centre")
         }
         Button(
+            modifier =  Modifier.fillMaxWidth(),
             onClick = { onSelect(CampusPlace.StudentSupport) }
         ) {
             Text("Student Support")
@@ -86,19 +96,11 @@ fun CampusScreen(
     place: CampusPlace,
     onBack: () -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-
-        Button(
-            onClick = { onBack() }
-        ) {
-            Text("Back")
-        }
-
-        Text(place.title)
+    when (place) {
+        CampusPlace.Library -> LibraryScreen(onBack)
+        CampusPlace.ComputingLabs -> ComputingLabsScreen(onBack)
+        CampusPlace.Cafeteria -> CafeteriaScreen(onBack)
+        CampusPlace.SportsCentre -> SportsCentreScreen(onBack)
+        CampusPlace.StudentSupport -> StudentSupportScreen(onBack)
     }
 }
