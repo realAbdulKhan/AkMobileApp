@@ -33,6 +33,28 @@ import androidx.compose.material3.Surface
 import com.example.akmobileapp.demos.CampusGuide
 import com.example.akmobileapp.ui.theme.AkMobileAppTheme
 
+//class MainActivity : ComponentActivity() {
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//        enableEdgeToEdge()
+//
+//        setContent {
+//            AkMobileAppTheme {
+//                Surface {
+//                    CampusGuide()
+//                }
+//            }
+//        }
+//    }
+//}
+
+
+
+import com.example.akmobileapp.demos.ExerciseApp
+
+
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +65,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AkMobileAppTheme {
                 Surface {
-                    CampusGuide()
+                    ExerciseApp()
                 }
             }
         }
